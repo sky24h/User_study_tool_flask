@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>User Test V_0.1</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/style.css" rel="stylesheet">
+</head>
+ 
+<body>
+ 
+    <div class="container">
+        <div class="header">
+            <h3 class="text-center">Thank you for your participation !</h3>
+        </div>
+        <div class="jumbotron">
+            <h3 class="text-center">Input a ID(whatever you like) and click to start</h3>
+            <p class="lead"></p>
+                  <form id="form-start" action="{{ url_for('start') }}" method="POST" enctype="multipart/form-data">
+                  <input name="id">
+                  <p></p>
+                  <button id="Start" class="btn btn-lg btn-success" type="submit" name="mode" value=id>Start</button>
+                  </form>
+        </div> 
+        <footer class="footer">
+            <p>&copy; Yuantian,Huang. 2020.</p>
+        </footer>
+    </div>
+</body>
+ 
+</html>
+
