@@ -1,5 +1,3 @@
-# web-app for API image manipulation
-
 from flask import Flask, request, render_template, send_from_directory
 import os
 from PIL import Image
@@ -7,14 +5,21 @@ import random
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+image_dir = './static/images/'
 
-with open('./static/list.txt','r') as f:
-    name_list = f.read().splitlines()
+list_method = ['ours/', 'real/', 'pix2pixHD/', 'SPADE/']
+list_style = ['ink/', 'wat/', 'monet/', 'van/', 'cez/']
 
 def random_pick():
-    image_a = random.choice(name_list)
-    image_b = random.choice(name_list)
-    return image_a+'.png', image_b+'.png'
+    pick_style = random.choice(list_style)
+    pick_method1 = random.choice(list_method)
+    pick_method2 = random.choice(list_method)
+
+    while (pick_method1==pick_method2):
+        pick_method2 = random.choice(list_method)
+    image_a = random.choice(os.listdir(image_dir + pick_method1 + pick_style))
+    image_b = random.choice(os.listdir(image_dir + pick_method2 + pick_style))
+    return pick_method1 + pick_style + image_a, pick_method2 + pick_style + image_b
 
 global count
 count = 0
@@ -23,7 +28,6 @@ count = 0
 @app.route("/")
 def main():
     return render_template('index.html')
-
 
 # upload selected image and forward to processing page
 @app.route("/start", methods=["POST"])
@@ -36,8 +40,6 @@ def start():
     image_a, image_b = random_pick()
     return render_template('main.html', image_a = image_a, image_b = image_b, user_id = user_id, count = count)
 
-
-# flip filename 'vertical' or 'horizontal'
 @app.route("/select", methods=["POST"])
 def select():
     global count
@@ -45,6 +47,8 @@ def select():
     count += 1
     if count == 500:
         return render_template('message.html', message1 = 'Test completed successfully.', message2 = 'Thank you very much !')
+    list_a, list_b = request.form['image_a'].split('/'), request.form['image_b'].split('/')
+    print(list_a[0], list_b[0], list_a[1])
 
     if 'A' in request.form['mode']:
         selected_filename = request.form['image_a']
@@ -53,7 +57,6 @@ def select():
     return render_template('main.html', image_a = image_a, image_b = image_b, user_id = user_id, count = count)
 
 
-# retrieve file from 'static/images' directory
 @app.route('/static/images/<filename>')
 def send_image(filename):
     return send_from_directory("static/images", filename)
