@@ -48,12 +48,18 @@ def select():
     if count == 500:
         return render_template('message.html', message1 = 'Test completed successfully.', message2 = 'Thank you very much !')
     list_a, list_b = request.form['image_a'].split('/'), request.form['image_b'].split('/')
-    print(list_a[0], list_b[0], list_a[1])
+    
+    with open('./results/' + user_id + '.txt', 'a') as f:
+        if 'A' in request.form['mode']:
+            selected_filename = request.form['image_a']
+            f.write(list_a[0] + '_' + list_b[0] + '_' + list_a[1] + '\n')
+            print(list_a[0], list_b[0], list_a[1])
 
-    if 'A' in request.form['mode']:
-        selected_filename = request.form['image_a']
-    elif 'B' in request.form['mode']:
-        selected_filename = request.form['image_b']
+        elif 'B' in request.form['mode']:
+            selected_filename = request.form['image_b']
+            f.write(list_b[0] + '_' + list_a[0] + '_' + list_a[1] + '\n')
+            print(list_b[0], list_a[0], list_a[1])
+
     return render_template('main.html', image_a = image_a, image_b = image_b, user_id = user_id, count = count)
 
 
