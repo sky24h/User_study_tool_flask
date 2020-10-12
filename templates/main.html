@@ -2,43 +2,38 @@
 <html lang="en">
  
 <head>
-    <title>User Test V_0.1</title>
+    <title>User Test V_0.2</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/style.css" rel="stylesheet">
 </head>
  
 <body>
- 
-    <div class="container">
-        <div class="header">
-            <h3 class="text-center">Please choose the more realitic one</h3>
-        </div>
- 
-        <div class="jumbotron">
-            
-	    <div id="image1">
-            <img src=" {{url_for('send_image', filename=image_a)}} " style="max-width: 384px;">
-            <img src=" {{url_for('send_image', filename=image_b)}} " style="max-width: 384px;">
+    <div class="header">
+        <h3 class="text-center">Please choose the more realistic one</h3>
+    </div>
+
+        <div class="row"> 
+            <div class="column_left">
+                <img width="512" height="512" src=" {{url_for('send_image', filename=image_a)}} ">
             </div>
-          </div>
- 
-        <div class="jumbotron">
-            <p class="lead"></p>
-                  <form id="form-select" action="{{ url_for('select') }}" method="POST" enctype="multipart/form-data">
-                  <button id="select_A" class="btn btn-lg btn-success" type="submit" name="mode" value="A">Left</button>
-                  <button id="select_B" class="btn btn-lg btn-success" type="submit" name="mode" value="B">Right</button>
-			  <input type="text" class="hidden" name="image_a" value="{{ image_a }}">  
-                          <input type="text" class="hidden" name="image_b" value="{{ image_b }}">
-                  </form>
-                  <p></p>
-                  <p> Your ID is {{user_id}}, {{count}} / 500</p>
+            <div class="column_right">
+                <img width="512" height="512" src=" {{url_for('send_image', filename=image_b)}} ">
+            </div>
         </div>
+
+    <div class="container"> 
+        <form id="form-select" action="{{ url_for('select') }}" method="POST" enctype="multipart/form-data">
+            <button id="select_A" class="btn btn-lg btn-success" type="submit" name="mode" value="A">A</button>
+            <button id="select_B" class="btn btn-lg btn-success" type="submit" name="mode" value="B">B</button>
+            <input type="text" class="hidden" name="image_a" value="{{ image_a }}">
+            <input type="text" class="hidden" name="image_b" value="{{ image_b }}">
+        </form>
+        <div class="divider"></div>
+        <p> Your ID is {{user_id}}, {{count}} / 500</p>
+    </div>
         <footer class="footer">
             <p>&copy; Yuantian,Huang. 2020.</p>
         </footer>
- 
-    </div>
 </body>
  
 </html>

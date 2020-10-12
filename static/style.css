@@ -1,23 +1,70 @@
 .btn-lg,
 .nav-pills > li > a,
-.container .jumbotron {
-    border: 0px;
-    border-radius: 0px;
+
+body {
+  margin: 0;
+  font-family: Arial;
 }
 
-#upload-button,
-#file-picker {
-    margin-top: 30px;
-}
-}
-div#image-container {
-    max-width: 512px;
+.header {
+  text-align: center;
+  padding: 32px;
 }
 
-div#image-container > img {
-    max-width: 100%;
+.column_left {
+  /*-ms-flex: 50%; /* IE 10 */
+  padding: 0 10px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
 }
 
+.column_right {
+  /*-ms-flex: 50%; /* IE 10 */
+  padding: 0 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+
+.column {
+  /*-ms-flex: 50%; /* IE 10 */
+  padding: 0 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.container {
+  /*display: -ms-flexbox;
+  display: flex;*/
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+  
+img {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    margin: 0 auto
+  }
+  
 
 .hidden {
 	display: none !important;
