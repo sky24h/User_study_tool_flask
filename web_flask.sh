@@ -1,1 +1,1 @@
-./ngrok http 5000
+~/opt/ngrok http 5000
