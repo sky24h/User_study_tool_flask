@@ -6,13 +6,13 @@ from utils import pick_with_style, pick
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 #get all the paths
-image_dir = './static/images/ours'
+image_dir = './static/images'
 
 image_dir = image_dir + '/' if image_dir[-1] != '/' else image_dir
 list_method_to_compare = [os.path.join(image_dir, x) for x in os.listdir(image_dir)]
 
 #Set to False if there is only one type of output image.
-with_style = False
+with_style = True
 if with_style:
     list_style_to_compare = os.listdir(list_method_to_compare[0])
 

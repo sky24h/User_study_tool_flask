@@ -1,6 +1,0 @@
-pix2pixHD_real_cez
-SPADE_pix2pixHD_wat
-SPADE_real_van
-real_ours_cez
-real_ours_van
-real_ours_wat

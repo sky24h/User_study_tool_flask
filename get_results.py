@@ -41,8 +41,11 @@ if __name__ == "__main__":
     for i in methods:
         for j in methods:
             if i != j:
-                per = "{:.2%}".format(res[i+'_'+j] / (res[i+'_'+j] + res[j+'_'+i]))
-                sheet.write(methods.index(j)+1, methods.index(i)+1, float(per[:-1]))
+                try:
+                    per = float("{:.2%}".format(res[i+'_'+j] / (res[i+'_'+j] + res[j+'_'+i]))[:-1])
+                except:
+                    per = '-'
+                sheet.write(methods.index(j)+1, methods.index(i)+1, per)
                 if i == 'ours':
                     print(i+'_'+j, per)
 
