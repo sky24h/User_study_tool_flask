@@ -6,19 +6,18 @@ from utils import pick_with_style, pick
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 #get all the paths
-image_dir = './static/images/'
-list_method_to_compare = [image_dir + x for x in os.listdir(image_dir)]
-list_style_to_compare = os.listdir(list_method_to_compare[0])
+image_dir = './static/images/ours'
 
-#Set to True if you want to compare one to one.
-one_to_one = True
+image_dir = image_dir + '/' if image_dir[-1] != '/' else image_dir
+list_method_to_compare = [os.path.join(image_dir, x) for x in os.listdir(image_dir)]
+
 #Set to False if there is only one type of output image.
-with_style = True
-#Set to True if the samples are randomly generated.
-#Set to False if you want to compare samples which have same input (please change the file name to the same as the input).
+with_style = False
+if with_style:
+    list_style_to_compare = os.listdir(list_method_to_compare[0])
+
+#Set to False if you want to compare images in pairs.
 random_pick = True
-#Number of methods
-num_method = len(list_method_to_compare)
 
 global count
 count = 0
@@ -61,13 +60,21 @@ def select():
     with open('./results/' + user_id + '.txt', 'a') as f:
         if 'A' in request.form['mode']:
             selected_filename = request.form['image_a']
-            f.write(list_a[0] + '_' + list_b[0] + '_' + list_a[1] + '\n')
-            print(list_a[0], list_b[0], list_a[1])
+            if with_style:
+                f.write(list_a[0] + '_' + list_b[0] + '_' + list_a[1] + '\n')
+                print(list_a[0], list_b[0])
+            else:
+                f.write(list_a[0] + '_' + list_b[0] + '_' + '0' + '\n')
+                print(list_a[0], list_b[0], list_a[1])
 
         elif 'B' in request.form['mode']:
             selected_filename = request.form['image_b']
-            f.write(list_b[0] + '_' + list_a[0] + '_' + list_a[1] + '\n')
-            print(list_b[0], list_a[0], list_a[1])
+            if with_style:
+                f.write(list_b[0] + '_' + list_a[0] + '_' + list_a[1] + '\n')
+                print(list_b[0], list_a[0])
+            else:
+                f.write(list_b[0] + '_' + list_a[0] + '_' + '0' + '\n')
+                print(list_b[0], list_a[0], list_a[1])
 
     return render_template('main.html', image_a = image_a, image_b = image_b, user_id = user_id, count = count)
 
