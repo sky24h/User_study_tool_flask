@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, send_from_directory
 import os
-from PIL import Image
+# from PIL import Image
 import random
 from utils import pick_with_style, pick
 
