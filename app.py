@@ -33,6 +33,12 @@ def start():
     global user_id, count
     count = 1
     user_id = request.form['id']
+
+    # if exist, continue counting
+    if os.path.exists('./results/' + user_id + '.txt'):
+        with open('./results/' + user_id + '.txt', 'r') as r:
+            count = len(r.readlines()) + 1
+
     if user_id == '':
         return render_template('message.html', message1 = 'User ID cannot be EMPTY !', message2 = 'Please input one as you like.')
     if with_style:
@@ -46,6 +52,7 @@ def start():
 @app.route("/select", methods=["POST"])
 def select():
     global count
+
     if with_style:
         image_a, image_b = pick_with_style(list_method_to_compare, list_style_to_compare, random_pick)
     else:
