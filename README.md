@@ -1,3 +1,3 @@
-# User_study_flask_demo
+# User_study_tool_flask
 
 A simple tool for user study.
