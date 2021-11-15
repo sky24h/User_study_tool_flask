@@ -3,8 +3,13 @@ import os
 import random
 from utils import pick_with_style, pick
 
+# declare constants
+HOST = '0.0.0.0'
+PORT = 5555
+
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 #get all the paths
 image_dir = './static/images'
 
@@ -91,5 +96,7 @@ def send_image(filename):
     return send_from_directory("./",filename)
 
 if __name__ == "__main__":
-    app.run()
-
+    # run web server
+    app.run(host=HOST,
+            debug=True,  # automatic reloading enabled
+            port=PORT)
