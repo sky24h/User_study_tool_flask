@@ -64,7 +64,7 @@ def select():
         image_a, image_b = pick(list_method_to_compare, random_pick)
     count += 1
     print('image_a', image_a, 'image_b', image_b)
-    if count == 10:
+    if count == 500:
         return render_template('message.html', message1 = 'Test completed successfully.', message2 = 'Thank you very much !')
     
     list_a, list_b = request.form['image_a'].replace(image_dir, '').split('/'), request.form['image_b'].replace(image_dir, '').split('/')
