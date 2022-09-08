@@ -17,7 +17,7 @@ image_dir = image_dir + '/' if image_dir[-1] != '/' else image_dir
 list_method_to_compare = [os.path.join(image_dir, x) for x in os.listdir(image_dir)]
 
 #Set to False if there is only one type of output image.
-with_style = True
+with_style = False
 if with_style:
     list_style_to_compare = os.listdir(list_method_to_compare[0])
 
@@ -64,7 +64,7 @@ def select():
         image_a, image_b = pick(list_method_to_compare, random_pick)
     count += 1
     print('image_a', image_a, 'image_b', image_b)
-    if count == 500:
+    if count == 10:
         return render_template('message.html', message1 = 'Test completed successfully.', message2 = 'Thank you very much !')
     
     list_a, list_b = request.form['image_a'].replace(image_dir, '').split('/'), request.form['image_b'].replace(image_dir, '').split('/')
